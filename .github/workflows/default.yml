@@ -30,7 +30,7 @@ jobs:
           pip install -r requirements.txt
       - name: Run Tests'
         run: |
-          python manage.py test
+          pytest --junitxml=report.xml --cov-report xml:cov.xml --cov=core core/tests/
       - name: Foresight test kit
         if: success() || failure()
         uses: runforesight/foresight-test-kit-action@v1
@@ -38,6 +38,6 @@ jobs:
           api_key: ${{ secrets.THUNDRA_APIKEY }}
           test_format: JUNIT
           test_framework: PYTEST
-          test_path: ./build/test-results/test
+          test_path: report.xml
           coverage_format: JACOCO/XML
-          coverage_path: ./build/reports/jacoco/test
+          coverage_path: cov.xml
