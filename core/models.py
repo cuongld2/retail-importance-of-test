@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models.signals import post_save
 from django.conf import settings
 from django.db import models
@@ -42,7 +43,7 @@ class Item(models.Model):
     slug = models.SlugField()
     description = models.TextField()
     image = models.ImageField()
-    total = models.IntegerField(default=1)
+    total = models.IntegerField(default=1, validators=[MinValueValidator(2), MaxValueValidator(100)])
 
     def __str__(self):
         return self.title
@@ -68,7 +69,7 @@ class OrderItem(models.Model):
                              on_delete=models.CASCADE)
     ordered = models.BooleanField(default=False)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=1)
+    quantity = models.IntegerField(default=7)
 
     def __str__(self):
         return f"{self.quantity} of {self.item.title}"
