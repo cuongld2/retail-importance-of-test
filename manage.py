@@ -7,6 +7,8 @@ if __name__ == '__main__':
     from pathlib import Path
     from dotenv import load_dotenv
 
+    ## Update something
+
     env_path = Path('config.env').resolve()
     load_dotenv(dotenv_path=env_path)
     try:
