@@ -14,4 +14,8 @@ class TestMyModel(TestCase):
         self.assertEqual(
             item.quantity, 1)
 
+    def test_check_title_item(self):
+        item = Item(title='Test title')
+        self.assertEqual(item.__str__(), 'Test title')
+
 
